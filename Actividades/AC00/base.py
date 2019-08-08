@@ -1,33 +1,35 @@
 # Seccion para importar liberías
-
+def side(x,y):
+    return (((x[0]-y[0])**2)+((x[1]-y[1]))**2)**(1/2)
+# Las coordenadas deben ser ingresadas de la forma [x,y]
 class Cuadrado(object):
-	def __init__(self,v1,v2,v3,v4):
+    def __init__(self,v1,v2,v3,v4):
         self.A=v1
         self.B=v2
         self.C=v3
-		self.D=v4
-		self.side=side(self.A,self.B)
-    def area(self):
+        self.D=v4
+        self.side=side(self.A,self.B)
+    def obtener_area(self):
         return self.side**2
-    def peri(self):
+    def obtener_perimetro(self):
         return self.side*4
     def __str__(self):
         return "Cuadrado de coordenadas A="+str(self.A)+" B="+str(self.B)+" C="+str(self.C)+" D="+str(self.D)+"\n Longitud de lados "+str(self.side)
 
 class Triangulo(object):
-	def __init__(self,v1,v2,v3):
+    def __init__(self,v1,v2,v3):
         self.A=v1
         self.B=v2
-		self.C=v3
-		self.a=side(self.B,self.C)
-		self.b=side(self.A,self.C)
-		self.c=side(self.A,self.B)
-    def area(self):
-        sp=self.peri()/2
+        self.C=v3
+        self.a=side(self.B,self.C)
+        self.b=side(self.A,self.C)
+        self.c=side(self.A,self.B)
+    def obtener_area(self):
+        sp=self.obtener_perimetro()/2
         return ((sp-self.a)*(sp-self.b)*(sp-self.c))**(1/2)
-    def peri(self):
+    def obtener_perimetro(self):
         return self.a+self.b+self.c
-    def equi(self):
+    def es_equilatero(self):
         if self.a==self.b and self.b==self.c:
             return True
         else:
@@ -37,4 +39,5 @@ class Triangulo(object):
 		
 		
 if __name__ == '__main__':
-	# Crear instancias aquí
+    P1=Triangulo([0,0],[3,(3**(1/2))*3],[6,0])
+    P2=Cuadrado([1,2],[2,2],[2,3],[1,3])
