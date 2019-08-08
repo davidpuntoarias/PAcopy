@@ -10,7 +10,7 @@ Todo el proceso de recolección de tareas y actividades está automatizado, por 
 
 | Nombre | Mail UC |
 | :-: | :-: |
-| David | david.arias@uc.cl |
+| David Arias | david.arias@uc.cl |
 
 ## Sobre las entregas
 
