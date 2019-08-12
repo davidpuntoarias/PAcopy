@@ -6,6 +6,7 @@ from sys import exit
 comando, largo, ancho, legos_tablero, board, board_showed, user = "", 0, 0, 0, [], [], "default"
 folder = path.join(path.dirname(__file__), "partidas")
 rank = path.join(path.dirname(__file__), "puntajes.dat")
+acento = {"á":"a", "é":"e", "í":"i", "ó":"o", "ú":"u", "Á":"A", "É":"E", "Í":"I", "Ó":"O", "Ú":"U"}
 valores_validos = ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
 menu_juego = ["Descubrir baldosa", "Guardar la partida", "Guardar y volver al menú principal"]
 menu_principal = ["Nueva Partida", "Cargar Partida", "Ranking"]
@@ -61,7 +62,7 @@ def agregar_lego(probabilidad, legos, excepcion):
 def generar_tablero():
     global board, board_showed, user, legos_tablero, largo, ancho
     board, board_showed = [], []
-    user = input("Elige una apodo al que asignar tu partida:\n")
+    user = quitar_acento(input("Elige una apodo al que asignar tu partida:\n"))
     largo = int(verificar("largo"))
     ancho = int(verificar("ancho"))
     legos_tablero = int(largo * ancho * constant.PROB_LEGO // 1)
@@ -255,7 +256,7 @@ def default_ranking(rank):
     with open(rank, "w") as ranking:
         for user_score in ["Vid/2019", "Robert Donner/1989", "Pajitnov/1984", "Iwatani/1980",
                            "Bushnell/1972", "Paper/1000",  "Mario/64", "Megaman/11",
-                           "Age HD/2", "Jesús/0"]:
+                           "Age HD/2", "Jesus/0"]:
             ranking.writelines(user_score + "\n")
 
 
@@ -269,6 +270,17 @@ def imprimir_ranking():
     print("-||Top 10 Mejores puntajes||-")
     for score in datos:
         print(score[0] + ":", score[1], "ptos")
+
+
+def quitar_acento(user):
+    global acento
+    resultado = ""
+    for letra in range(len(user)):
+        if user[letra] in acento:
+            resultado += acento[user[letra]]
+        else:
+            resultado += user[letra]
+    return resultado
 
 
 while comando != 0:
