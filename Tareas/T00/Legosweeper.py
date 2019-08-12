@@ -220,7 +220,8 @@ def partida():
         menu(menu_juego, 0)
         if comando == "1":
             posicion = input("Ingresa la coordenada de la baldosa (Ej: A4)\n")
-            if len(posicion) == 2 and posicion[0].isupper() and posicion[1].isdigit():
+            if int(posicion[1:]) < largo and posicion[0].isupper() and\
+               posicion[1].isdigit():
                 columna = columna_a_index.index(posicion[0])
                 fila = int(posicion[1:])
                 if board[fila][columna] == "L":
