@@ -173,8 +173,8 @@ def game_end():
     table.print_tablero(board_showed)
     puntaje = baldosas_descubiertas() * constant.POND_PUNT * legos_tablero
     print("\n-||Game over||-\n Felicidades tu puntuación es:\n\n" +
-          " ----|| " + user + str(puntaje) +
-          " ||----\n\n ------ ------")
+          " ----|| " + user, str(puntaje) +
+          "pts ||----\n\n ------ ------")
     comando = " "
     if not path.isfile(rank):
         default_ranking(rank)
@@ -214,23 +214,25 @@ def partida():
     while True:
         table.print_tablero(board_showed)
 #       table.print_tablero(board) // Si se desea visualizar la posición de las minas descomentar
-        menu(menu_juego, 0)
         if (largo * ancho) - baldosas_descubiertas() == legos_tablero:
             game_end()
-            break
+            break        
+        menu(menu_juego, 0)
         if comando == "1":
             posicion = input("Ingresa la coordenada de la baldosa (Ej: A4)\n")
             if len(posicion) == 2 and posicion[0].isupper() and posicion[1].isdigit():
                 columna = columna_a_index.index(posicion[0])
                 fila = int(posicion[1:])
-                if board[fila][columna] == "L" and baldosas_iniciales != 0:
-                    game_end()
-                    break
-                else:
+                if board[fila][columna] == "L":
                     if baldosas_iniciales == 0:
                         board[fila][columna] = " "
                         agregar_lego(((largo * ancho) // legos_tablero) + 1, 1)
                         baldosas_iniciales = 1
+                        lego_alrededor(fila, columna)
+                    else:
+                        game_end()
+                        break
+                else:
                     lego_alrededor(fila, columna)
             else:
                 error(0)
@@ -249,7 +251,7 @@ def partida():
 def default_ranking(rank):
     with open(rank, "w") as ranking:
         for user_score in ["Vid/2019", "Robert Donner/1989", "Pajitnov/1984", "Iwatani/1980",
-                           "Bushnell/1972",  "-/-", "-/-", "-/-", "-/-", "-/-"]:
+                           "Bushnell/1972",  "-/0", "-/0", "-/0", "-/0", "-/0"]:
             ranking.writelines(user_score + "\n")
 
 
