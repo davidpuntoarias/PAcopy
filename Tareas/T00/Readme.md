@@ -5,7 +5,7 @@
 > Adentrate en Legosweeper la increible simulación que te permite sentir la emocionante experiencia de evitar 
 > legos escondidos en baldosas. Para está misión se te entregara información por cada baldosa descubierta sin
 > un lego, en caso contrario, si se llega a encontrar con un mortal lego la simulación acabará para proteger
-> al usuario. Al descubrir una casilla se entrega informacion de la cantidad casillas adyacentes que poseen
+> al usuario. Al descubrir una casilla se entrega informacion de la cantidad casillas de adyacentes que poseen
 > un lego *(si el numero entregado es cero se revelarán las casillas adyacentes de manera automática)* y el
 > objetivo es descubrir todas las casillas sin un lego. Al finalizar se proporcionará una puntuación
 > correspondiente a la dificultad de la simulación y las casillas descubiertas, si esta es digna podrá ser
