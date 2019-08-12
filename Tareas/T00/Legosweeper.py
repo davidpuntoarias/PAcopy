@@ -174,7 +174,7 @@ def game_end():
     table.print_tablero(board_showed)
     puntaje = baldosas_descubiertas() * constant.POND_PUNT * legos_tablero
     print("\n-||Game over||-\n Felicidades tu puntuacion es:\n\n" +
-          " ----|| " + str(puntaje) +
+          " ----|| " + user + str(puntaje) +
           " ||----\n\n ------ ------")
     comando = " "
     if not path.isfile(rank):
