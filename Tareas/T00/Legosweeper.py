@@ -201,7 +201,7 @@ def salir(volver):
     elif volver:
         comando = " "
         return True
-    sys.exit(0)
+    exit(0)
 
 
 def partida():
