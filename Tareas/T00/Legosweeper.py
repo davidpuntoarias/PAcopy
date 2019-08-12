@@ -178,7 +178,7 @@ def game_end():
           " ||----\n\n ------ ------")
     comando = " "
     if not path.isfile(rank):
-        defaul_ranking(rank)
+        default_ranking(rank)
     with open(rank, "rt") as ranking:
         datos = ranking.readlines()
     datos = dato_a_lista(datos)
