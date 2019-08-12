@@ -28,7 +28,7 @@ def menu(options, back):
         exit = "Volver al menú principal"
     print("\n-Seleccione una opción:")
     for option in range(1, len(options) + 1):
-        print("[" + str(option) + "] " + options[option-1])
+        print("[" + str(option) + "] " + options[option - 1])
     print("[0]", exit + "\n")
     comando = input("Ingrese el número de la opción que deseea utilizar:\n")
     print(" ------ ------ ")
@@ -63,15 +63,14 @@ def generar_tablero():
     user = input("Elige una apodo al que asignar tu partida:\n")
     largo = int(verificar("largo"))
     ancho = int(verificar("ancho"))
-    legos = int(largo * ancho * constant.PROB_LEGO // 1)
-    legos_tablero = legos
+    legos_tablero = int(largo * ancho * constant.PROB_LEGO // 1)
     row = []
     for y in range(ancho):
         row.append(" ")
     for x in range(largo):
         board.append(row[:])
         board_showed.append(row[:])
-    agregar_lego(((largo * ancho) // legos) + 1, legos)
+    agregar_lego(((largo * ancho) // legos_tablero), legos_tablero)
 
 
 def fila_a_dato(fila):
@@ -173,7 +172,7 @@ def game_end():
                 board_showed[fila][columna] = "L"
     table.print_tablero(board_showed)
     puntaje = baldosas_descubiertas() * constant.POND_PUNT * legos_tablero
-    print("\n-||Game over||-\n Felicidades tu puntuacion es:\n\n" +
+    print("\n-||Game over||-\n Felicidades tu puntuación es:\n\n" +
           " ----|| " + user + str(puntaje) +
           " ||----\n\n ------ ------")
     comando = " "
@@ -195,13 +194,18 @@ def game_end():
 
 def salir(volver):
     global comando
-    if "0" == input("¿Estás seguro de que deseas salir?\n[1] Sí\n[0] No\n\n"):
-        comando = " "
-        return False
-    elif volver:
-        comando = " "
-        return True
-    exit(0)
+    while True:
+        comando = input("¿Estás seguro de que deseas salir?\n[1] Sí\n[0] No\n\n")
+        if comando == "0" :
+            comando = " "
+            return False
+        elif volver:
+            comando = " "
+            return True
+        elif comando != 0:
+            exit(0)
+        else:
+            error(0)
 
 
 def partida():
@@ -209,7 +213,7 @@ def partida():
     baldosas_iniciales = baldosas_descubiertas()
     while True:
         table.print_tablero(board_showed)
-#        table.print_tablero(board)
+#       table.print_tablero(board) // Si se desea visualizar la posición de las minas descomentar
         menu(menu_juego, 0)
         if (largo * ancho) - baldosas_descubiertas() == legos_tablero:
             game_end()
@@ -264,13 +268,12 @@ def imprimir_ranking():
 while comando != 0:
     print("\n-||Bienvenido a LegoSweeper v1.0 Beta||-")
     menu(menu_principal, 1)
-    if comando in ["1", "2"]:
-        if comando == "1":
-            generar_tablero()
+    if comando == "1":
+        generar_tablero()
+        partida()
+    elif comando == "2":
+        if cargar_tablero():
             partida()
-        elif comando == "2":
-            if cargar_tablero():
-                partida()
     elif comando == "3":
         imprimir_ranking()
     elif comando == "0":
