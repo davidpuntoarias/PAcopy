@@ -167,6 +167,11 @@ def baldosas_descubiertas():
 
 def game_end():
     global comando, legos_tablero, board, board_showed, rank, user
+    for fila in range(len(board)):
+        for columna in range(len(board[0])):
+            if board[fila][columna] == "L":
+                board_showed[fila][columna] = "L"
+    table.print_tablero(board_showed)
     puntaje = baldosas_descubiertas() * constant.POND_PUNT * legos_tablero
     print("\n-||Game over||-\n Felicidades tu puntuacion es:\n\n" +
           " ----|| " + str(puntaje) +
