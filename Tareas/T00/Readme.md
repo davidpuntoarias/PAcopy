@@ -6,7 +6,7 @@
 > legos escondidos en baldosas. Para está misión se te entregara información por cada baldosa descubierta sin
 > un lego, en caso contrario, si se llega a encontrar con un mortal lego la simulación acabará para proteger
 > al usuario. Al descubrir una casilla se entrega informacion de la cantidad casillas de adyacentes que poseen
-> un lego *(si el numero entregado es cero se revelarán las casillas adyacentes de manera automática)* y el
+> un lego *(si el numero entregado es cero se revelarán las casillas adyacentes de manera automática)*, el
 > objetivo es descubrir todas las casillas sin un lego. Al finalizar se proporcionará una puntuación
 > correspondiente a la dificultad de la simulación y las casillas descubiertas, si esta es digna podrá ser
 > almacenada en el ranking con los 10 mejores puntajes registrados hasta el momento.
