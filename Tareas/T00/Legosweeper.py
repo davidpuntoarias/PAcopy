@@ -5,7 +5,7 @@ from os import path, makedirs
 from sys import exit
 comando, largo, ancho, legos_tablero, board, board_showed, user = "", 0, 0, 0, [], [], "default"
 folder = path.join(path.dirname(__file__), "partidas")
-rank = path.join(path.dirname(__file__), "ranking.dat")
+rank = path.join(path.dirname(__file__), "puntajes.dat")
 valores_validos = ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
 menu_juego = ["Descubrir baldosa", "Guardar la partida", "Guardar y volver al menú principal"]
 menu_principal = ["Nueva Partida", "Cargar Partida", "Ranking"]
@@ -43,12 +43,13 @@ def verificar(nombre):
         print("Error - El valor ingresado no es un número entre 3 y 15\n ------ ------ ")
 
 
-def agregar_lego(probabilidad, legos):
+def agregar_lego(probabilidad, legos, excepcion):
     global board
     while legos != 0:
         for fila in range(largo):
             for columna in range(ancho):
-                if randint(1, probabilidad) == 1 and board[fila][columna] != "L":
+                if randint(1, probabilidad) == 1 and board[fila][columna] != "L" and\
+                 [fila, columna] != excepcion:
                     board[fila][columna] = "L"
                     legos -= 1
                 if legos == 0:
@@ -70,7 +71,7 @@ def generar_tablero():
     for x in range(largo):
         board.append(row[:])
         board_showed.append(row[:])
-    agregar_lego(((largo * ancho) // legos_tablero), legos_tablero)
+    agregar_lego(((largo * ancho) // legos_tablero), legos_tablero, [" ", " "])
 
 
 def fila_a_dato(fila):
@@ -185,7 +186,6 @@ def game_end():
         if int(datos[dato][1]) < puntaje and dato + 1 != len(datos):
             datos = datos[:dato] + [[user, str(puntaje)]] + datos[dato:]
             break
-    datos = datos[:10]
     with open(rank, "w") as ranking:
         for dato in datos:
             ranking.writelines(fila_a_dato(dato) + "\n")
@@ -196,7 +196,7 @@ def salir(volver):
     global comando
     while True:
         comando = input("¿Estás seguro de que deseas salir?\n[1] Sí\n[0] No\n\n")
-        if comando == "0" :
+        if comando == "0":
             comando = " "
             return False
         elif volver:
@@ -216,7 +216,7 @@ def partida():
 #       table.print_tablero(board) // Si se desea visualizar la posición de las minas descomentar
         if (largo * ancho) - baldosas_descubiertas() == legos_tablero:
             game_end()
-            break        
+            break
         menu(menu_juego, 0)
         if comando == "1":
             posicion = input("Ingresa la coordenada de la baldosa (Ej: A4)\n")
@@ -226,7 +226,7 @@ def partida():
                 if board[fila][columna] == "L":
                     if baldosas_iniciales == 0:
                         board[fila][columna] = " "
-                        agregar_lego(((largo * ancho) // legos_tablero) + 1, 1)
+                        agregar_lego(((largo * ancho) // legos_tablero) + 1, 1, [fila, columna])
                         baldosas_iniciales = 1
                         lego_alrededor(fila, columna)
                     else:
@@ -251,7 +251,8 @@ def partida():
 def default_ranking(rank):
     with open(rank, "w") as ranking:
         for user_score in ["Vid/2019", "Robert Donner/1989", "Pajitnov/1984", "Iwatani/1980",
-                           "Bushnell/1972",  "-/0", "-/0", "-/0", "-/0", "-/0"]:
+                           "Bushnell/1972", "Paper/1000",  "Mario/64", "Megaman/11",
+                           "Age HD/2", "Jesús/0"]:
             ranking.writelines(user_score + "\n")
 
 
@@ -261,7 +262,7 @@ def imprimir_ranking():
         default_ranking(rank)
     with open(rank, "rt") as ranking:
         datos = ranking.readlines()
-    datos = dato_a_lista(datos)
+    datos = dato_a_lista(datos)[:10]
     print("-||Top 10 Mejores puntajes||-")
     for score in datos:
         print(score[0] + ":", score[1], "ptos")

@@ -7,7 +7,7 @@ __pycache__/
 **/partidas
 *.py[cod]
 *$py.class
-*ranking.dat
+*puntajes.dat
 
 *.idea
 *.DS_STORE
