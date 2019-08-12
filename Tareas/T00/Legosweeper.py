@@ -235,6 +235,8 @@ def partida():
                         break
                 else:
                     lego_alrededor(fila, columna)
+                    if baldosas_iniciales == 0:
+                        baldosas_iniciales = 1
             else:
                 error(0)
         elif comando in ["2", "3"]:
