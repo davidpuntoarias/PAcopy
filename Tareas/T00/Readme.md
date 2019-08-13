@@ -20,7 +20,7 @@ Se genera un archivo .sav en la carpeta partidas que tiene el siguiente formato:
 2. Largo del tablero
 3. Cantidad de legos del tablero
 4. Información de las posiciones de los legos en el tablero, se trata de una lista donde cada elemento se separa con "/" y cada linea representa una fila
-5. Información de el tablero mostrado al usuario, utiliza el mismo formato del caso anterior separando cada elemento de la lista con "/"
+5. Información de el tablero mostrado al usuario, utiliza el mismo formato del caso anterior separando cada elemento de la lista con "/" y cada linea representa una fila
 
 ***La información del tablero se almacena en una lista de listas**
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
