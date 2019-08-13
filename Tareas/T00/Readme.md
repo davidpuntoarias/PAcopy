@@ -13,6 +13,14 @@
 > Si el usuario no es capaz de continuar con la actividad, o no desea perder la simulación generada, existe
 > la opción de guardar los datos de la partida para continuar más tarde.
 
+###Formato de guardad partida:
+Se genera un archivo .sav en la carpeta partidas que tiene el siguiente formato:
+Ancho del tablero
+Largo del tablero
+Cantidad de legos del tablero
+Información de las posiciones de los legos en el tablero, se trata de una lista donde cada elemento se separa con "/" y cada linea representa una fila
+Información de el tablero mostrado al usuario, utiliza el mismo formato de los legos separando cada elemento de la lista con "/"
+** *La información del tablero se almacena en una lista de listas
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
 
 * Parte <X<sub>1</sub>>: Hecha completa
@@ -47,8 +55,8 @@ Por otro lado, los módulos que fueron creados fueron los siguientes:
 ## Supuestos y consideraciones adicionales :thinking:
 Los supuestos que realicé durante la tarea son los siguientes:
 
-1. <No se puede perder en el primer turno, ya que sería injusto que el jugador pierda de una manera tan azarosa sin acceso a ningún tipo de información> 
-2. <Se asume que el nombre de usuario no tiene caracteres especiales como cremillas, se pueden colocar tildes, pero se eliminaran. El método que conosco para realizar esto no está permitido>
+1. < No se puede perder en el primer turno, ya que sería injusto que el jugador pierda de una manera tan azarosa sin acceso a ningún tipo de información > 
+2. < Se asume que el nombre de usuario no tiene caracteres especiales como cremillas. Se pueden colocar tildes, pero se eliminaran. El método que conosco para realizar esto no está permitido >
 
 -------
 ## Referencias de código externo :book:

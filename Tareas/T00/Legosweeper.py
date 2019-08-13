@@ -3,12 +3,16 @@ import parametros as constant
 from random import randint
 from os import path, makedirs
 from sys import exit
-comando, largo, ancho, legos_tablero, board, board_showed, user = "", 0, 0, 0, [], [], "default"
+comando, largo, ancho, legos_tablero, board, board_showed,\
+ user = "", 0, 0, 0, [], [], "default"
 folder = path.join(path.dirname(__file__), "partidas")
 rank = path.join(path.dirname(__file__), "puntajes.dat")
-acento = {"á":"a", "é":"e", "í":"i", "ó":"o", "ú":"u", "Á":"A", "É":"E", "Í":"I", "Ó":"O", "Ú":"U"}
-valores_validos = ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
-menu_juego = ["Descubrir baldosa", "Guardar la partida", "Guardar y volver al menú principal"]
+acento = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u", "Á": "A", "É": "E",
+          "Í": "I", "Ó": "O", "Ú": "U"}
+valores_validos = ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
+                   "14", "15"]
+menu_juego = ["Descubrir baldosa", "Guardar la partida", "Guardar y" +
+              " volver al menú principal"]
 menu_principal = ["Nueva Partida", "Cargar Partida", "Ranking"]
 columna_a_index = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -17,7 +21,8 @@ def error(type):
     if type == 0:
         print("Error - Se ha ingresado un valor inválido")
     elif type == 1:
-        print("Error - No se ha encontrado ninguna partida asociado con el apodo ingresado")
+        print("Error - No se ha encontrado ninguna partida asociado con el\
+              apodo ingresado")
     print(" ------ ------")
 
 
@@ -38,10 +43,12 @@ def menu(options, back):
 def verificar(nombre):
     resultado = 0
     while True:
-        resultado = input("Ingrese un valor entre 3 y 15 para el " + nombre + " del tablero:\n")
+        resultado = input("Ingrese un valor entre 3 y 15 para el " + nombre +
+                          " del tablero:\n")
         if resultado in valores_validos:
             return resultado
-        print("Error - El valor ingresado no es un número entre 3 y 15\n ------ ------ ")
+        print(" ------ ------\nError - El valor ingresado no es un número\
+              entre 3 y 15\n ------ ------ ")
 
 
 def agregar_lego(probabilidad, legos, excepcion):
@@ -49,8 +56,8 @@ def agregar_lego(probabilidad, legos, excepcion):
     while legos != 0:
         for fila in range(largo):
             for columna in range(ancho):
-                if randint(1, probabilidad) == 1 and board[fila][columna] != "L" and\
-                 [fila, columna] != excepcion:
+                if randint(1, probabilidad) == 1 and\
+                 board[fila][columna] != "L" and [fila, columna] != excepcion:
                     board[fila][columna] = "L"
                     legos -= 1
                 if legos == 0:
@@ -91,21 +98,25 @@ def guardar_tablero():
     if not path.exists(folder):
         makedirs(folder)
     if path.isfile(directorio):
-        comando = input("Se ha detectado un archivo guardado con tu mismo apodo " +
-                        "¿Deseas sobreescribir el archivo?\n[1] Sí\n[2] No\n\n")
+        comando = input("Se ha detectado un archivo guardado con tu mismo " +
+                        "apodo " + "¿Deseas sobreescribir el archivo?\n[1]" +
+                        " Sí\n[0] No\n\n")
         if comando == "1":
             pass
-        elif comando == "2":
-            return
+        elif comando == "0":
+            return False
         else:
+            comando = " "
             error(0)
-            return
+            return False
     with open(directorio, "w") as save:
-        save.writelines("\n".join([str(largo), str(ancho), str(legos_tablero), ""]))
+        save.writelines("\n".join([str(largo), str(ancho),
+                        str(legos_tablero), ""]))
         for fila in board:
             save.writelines(fila_a_dato(fila) + "\n")
         for fila in board_showed:
             save.writelines(fila_a_dato(fila) + "\n")
+        return True
 
 
 def dato_a_lista(datos):
@@ -141,8 +152,8 @@ def lego_alrededor(fila, columna):
     if not board_showed[fila][columna].isdigit():
         for i in suma:
             for e in suma:
-                if fila + i < 0 or columna + e < 0 or fila + i >= largo or columna + e >= ancho\
-                 or (i == 0 and e == 0):
+                if fila + i < 0 or columna + e < 0 or fila + i >= largo\
+                 or columna + e >= ancho or (i == 0 and e == 0):
                     continue
                 elif board[fila + i][columna + e] == "L":
                     numero_legos += 1
@@ -196,39 +207,45 @@ def game_end():
 def salir(volver):
     global comando
     while True:
-        comando = input("¿Estás seguro de que deseas salir?\n[1] Sí\n[0] No\n\n")
+        comando = input("¿Estás seguro de que deseas salir?\n[1] " +
+                        "Sí\n[0] No\n\n")
         if comando == "0":
             comando = " "
             return False
         elif volver:
             comando = " "
             return True
-        elif comando != 0:
+        elif comando == 1:
             exit(0)
         else:
+            print(" ------ ------")
             error(0)
 
 
 def partida():
-    global board, board_showed, menu_juego, comando, largo, ancho, legos_tablero
+    global board, board_showed, menu_juego, comando, largo, ancho,\
+     legos_tablero
     baldosas_iniciales = baldosas_descubiertas()
     while True:
         table.print_tablero(board_showed)
-#       table.print_tablero(board) // Si se desea visualizar la posición de las minas descomentar
+#       table.print_tablero(board) //
+#       Si se desea visualizar la posición de las minas descomentar
+#       linea anterior
         if (largo * ancho) - baldosas_descubiertas() == legos_tablero:
             game_end()
             break
         menu(menu_juego, 0)
         if comando == "1":
             posicion = input("Ingresa la coordenada de la baldosa (Ej: A4)\n")
-            if int(posicion[1:]) < largo and posicion[0].isupper() and\
-               posicion[1].isdigit():
+            if posicion[0].isupper() and posicion[1].isdigit() and\
+               int(posicion[1:]) < largo:
                 columna = columna_a_index.index(posicion[0])
                 fila = int(posicion[1:])
                 if board[fila][columna] == "L":
                     if baldosas_iniciales == 0:
                         board[fila][columna] = " "
-                        agregar_lego(((largo * ancho) // legos_tablero) + 1, 1, [fila, columna])
+                        agregar_lego(((largo * ancho) // legos_tablero) +
+                                     1, 1, [fila, columna])
                         baldosas_iniciales = 1
                         lego_alrededor(fila, columna)
                     else:
@@ -239,10 +256,10 @@ def partida():
                     if baldosas_iniciales == 0:
                         baldosas_iniciales = 1
             else:
+                print(" ------ ------")
                 error(0)
         elif comando in ["2", "3"]:
-            guardar_tablero()
-            if comando == "3":
+            if guardar_tablero() and comando == "3":
                 if salir(True):
                     break
         elif comando == "0":
@@ -254,9 +271,9 @@ def partida():
 
 def default_ranking(rank):
     with open(rank, "w") as ranking:
-        for user_score in ["Vid/2019", "Robert Donner/1989", "Pajitnov/1984", "Iwatani/1980",
-                           "Bushnell/1972", "Paper/1000",  "Mario/64", "Megaman/11",
-                           "Age HD/2", "Jesus/0"]:
+        for user_score in ["Vid/2019", "Robert Donner/1989", "Pajitnov/1984",
+                           "Iwatani/1980", "Bushnell/1972", "Paper/1000",
+                           "Mario/64", "Megaman/11", "Age HD/2", "Jesus/0"]:
             ranking.writelines(user_score + "\n")
 
 
