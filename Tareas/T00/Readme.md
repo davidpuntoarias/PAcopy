@@ -22,7 +22,7 @@ Cantidad de legos del tablero
 Información de las posiciones de los legos en el tablero, se trata de una lista donde cada elemento se separa con "/" y cada linea representa una fila
 Información de el tablero mostrado al usuario, utiliza el mismo formato de los legos separando cada elemento de la lista con "/"
 
-** *La información del tablero se almacena en una lista de listas **
+***La información del tablero se almacena en una lista de listas**
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
 
 * Parte <X<sub>1</sub>>: Hecha completa
