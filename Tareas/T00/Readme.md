@@ -58,7 +58,6 @@ Por otro lado, los módulos que fueron creados fueron los siguientes:
 Los supuestos que realicé durante la tarea son los siguientes:
 
 1. < No se puede perder en el primer turno, ya que sería injusto que el jugador pierda de una manera tan azarosa sin acceso a ningún tipo de información > 
-2. < Se asume que el nombre de usuario no tiene caracteres especiales como cremillas. Se pueden colocar tildes, pero se eliminaran. El método que conosco para realizar esto no está permitido >
 
 -------
 ## Referencias de código externo :book:

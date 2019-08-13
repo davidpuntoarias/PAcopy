@@ -116,6 +116,8 @@ def guardar_tablero():
             save.writelines(fila_a_dato(fila) + "\n")
         for fila in board_showed:
             save.writelines(fila_a_dato(fila) + "\n")
+        print("Partida guardada de manera exitosa" +
+              "\n ------ ------")
         return True
 
 
