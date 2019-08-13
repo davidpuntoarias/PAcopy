@@ -16,11 +16,11 @@
 ### Formato de guardar partida:
 
 Se genera un archivo .sav en la carpeta partidas que tiene el siguiente formato:
-Ancho del tablero
-Largo del tablero
-Cantidad de legos del tablero
-Información de las posiciones de los legos en el tablero, se trata de una lista donde cada elemento se separa con "/" y cada linea representa una fila
-Información de el tablero mostrado al usuario, utiliza el mismo formato de los legos separando cada elemento de la lista con "/"
+1. Ancho del tablero
+2. Largo del tablero
+3. Cantidad de legos del tablero
+4. Información de las posiciones de los legos en el tablero, se trata de una lista donde cada elemento se separa con "/" y cada linea representa una fila
+5. Información de el tablero mostrado al usuario, utiliza el mismo formato de los legos separando cada elemento de la lista con "/"
 
 ***La información del tablero se almacena en una lista de listas**
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
