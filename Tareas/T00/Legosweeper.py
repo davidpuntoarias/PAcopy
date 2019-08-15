@@ -25,8 +25,8 @@ def error(type):
     if type == 0:
         print("Error - Se ha ingresado un valor inválido")
     elif type == 1:
-        print("Error - No se ha encontrado ninguna partida asociado con el\
-              apodo ingresado")
+        print("Error - No se ha encontrado ninguna partida asociado con el " +
+              "apodo ingresado")
     print(" ------ ------")
 
 
@@ -51,8 +51,8 @@ def verificar(nombre):
                           " del tablero:\n")
         if resultado in valores_validos:
             return resultado
-        print(" ------ ------\nError - El valor ingresado no es un número\
-              entre 3 y 15\n ------ ------ ")
+        print(" ------ ------\nError - El valor ingresado no es un número " +
+              "entre 3 y 15\n ------ ------ ")
 
 
 def agregar_lego(probabilidad, legos, excepcion):
@@ -130,7 +130,7 @@ def guardar_tablero():
             save.writelines(fila_a_dato(fila) + "\n")
         for fila in board_showed:
             save.writelines(fila_a_dato(fila) + "\n")
-        print("Partida guardada de manera exitosa" +
+        print(" ------ ------\nPartida guardada de manera exitosa" +
               "\n ------ ------")
         return True
 
@@ -228,10 +228,10 @@ def salir(volver):
         if comando == "0":
             comando = " "
             return False
-        elif volver:
+        elif volver and comando == "1":
             comando = " "
             return True
-        elif comando == "1":
+        elif not volver and comando == "1":
             exit(0)
         else:
             error(0)
@@ -305,7 +305,7 @@ def imprimir_ranking():
 
 
 while comando != 0:
-    print("\n-||Bienvenido a LegoSweeper v1.0 Beta||-")
+    print("\n-||Bienvenido a LegoSweeper v2.1 Beta||-")
     menu(menu_principal, 1)
     if comando == "1":
         generar_tablero()
