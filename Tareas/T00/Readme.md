@@ -28,11 +28,11 @@ esp/esp/esp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   y cada linea representa una fila
 ****La información del tablero se almacena en una lista de listas**  
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
 
-* Menús a partir de los cuales se puede volver <implementado>
-* Reglas de juego <implementado>
-* Descubrimiento automático de casillas adyacentes si hay 0 legos <implementado>
-* Guardar y Cargar partida <implementado>
-* Ranking de 10 mejores puntajes y almacenamiento de todos los puntajes en un archivo <implementado>
+* Menús a partir de los cuales se puede volver < implementado >
+* Reglas de juego < implementado >
+* Descubrimiento automático de casillas adyacentes si hay 0 legos < implementado >
+* Guardar y Cargar partida < implementado >
+* Ranking de 10 mejores puntajes y almacenamiento de todos los puntajes en un archivo < implementado >
 
 ## Ejecución :computer:
 El módulo principal de la tarea a ejecutar es  ```Legosweeper.py```
