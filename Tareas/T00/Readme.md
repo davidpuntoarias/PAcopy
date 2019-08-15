@@ -33,6 +33,7 @@ esp/esp/esp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   y cada linea representa una fila
 * Descubrimiento automático de casillas adyacentes si hay 0 legos < implementado >
 * Guardar y Cargar partida < implementado >
 * Ranking de 10 mejores puntajes y almacenamiento de todos los puntajes en un archivo < implementado >
+* Al finalizar el juego se muestra el tablero con los legos y se almacena el puntaje < implementado >
 
 ## Ejecución :computer:
 El módulo principal de la tarea a ejecutar es  ```Legosweeper.py```
