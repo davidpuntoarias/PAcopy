@@ -1,4 +1,4 @@
-﻿# Tarea 00: LegoSweeper
+# Tarea 00: LegoSweeper
 
 ## Consideraciones generales :octocat:
 
@@ -12,20 +12,20 @@
 > almacenada en el ranking con los 10 mejores puntajes registrados hasta el momento.
 > Si el usuario no es capaz de continuar con la actividad, o no desea perder la simulación generada, existe
 > la opción de guardar los datos de la partida para continuar más tarde.
-
 ### Formato de guardar partida:
 
 Se genera un archivo .sav en la carpeta partidas que tiene el siguiente formato:
 3 -> Ancho del tablero
 3 -> Largo del tablero
 1 -> Cantidad de legos del tablero
- / / -> Información de las posiciones de los legos en el tablero, se trata de una lista donde cada elemento se separa con "/" y cada linea representa una fila
- / /L
- / / 
- / / -> Información de el tablero mostrado al usuario, utiliza el mismo formato del caso anterior separando cada elemento de la lista con "/" y cada linea representa una fila
- / / 
- / / 
-***La información del tablero se almacena en una lista de listas**
+esp/esp/esp -> Información de las posiciones de los legos en el tablero,
+esp/esp/ L &nbsp; &nbsp; &nbsp; &nbsp; se trata de una lista donde cada elemento se separa con "/"
+esp/esp/esp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   y cada linea representa una fila
+esp/esp/esp -> Información de el tablero mostrado al usuario, utiliza el 
+esp/esp/esp &nbsp;&nbsp;&nbsp;&nbsp; mismo formato del caso anterior separando cada elemento de 
+esp/esp/esp&nbsp; &nbsp; &nbsp; la lista con "/" y cada linea representa una fila
+***esp será un espacio en blanco en el archivo guardado**
+****La información del tablero se almacena en una lista de listas**
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
 
 * Menús a partir de los cuales se puede volver
