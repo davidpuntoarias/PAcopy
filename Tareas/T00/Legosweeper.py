@@ -228,11 +228,12 @@ def salir(volver):
         if comando == "0":
             comando = " "
             return False
-        elif volver and comando == "1":
-            comando = " "
-            return True
-        elif not volver and comando == "1":
-            exit(0)
+        if comando == "1":
+            if volver:
+                comando = " "
+                return True
+            else:
+                exit(0)
         else:
             error(0)
 
