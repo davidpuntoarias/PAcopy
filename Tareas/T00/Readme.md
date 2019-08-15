@@ -1,4 +1,4 @@
-﻿# Tarea 00: LegoSweeper
+# Tarea 00: LegoSweeper
 
 ## Consideraciones generales :octocat:
 
@@ -20,10 +20,10 @@ Se genera un archivo .sav en la carpeta partidas que tiene el siguiente formato:
 1 -> Cantidad de legos del tablero  
 esp/esp/esp -> Información de las posiciones de los legos en el tablero,  
 esp/esp/ L &nbsp; &nbsp; &nbsp; &nbsp; se trata de una lista donde cada elemento se separa con "/"  
-esp/esp/esp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   y cada linea representa una fila  
-esp/esp/esp -> Información de el tablero mostrado al usuario, utiliza el  
-esp/esp/esp &nbsp;&nbsp;&nbsp;&nbsp; mismo formato del caso anterior separando cada elemento de  
-esp/esp/esp&nbsp; &nbsp; &nbsp; la lista con "/" y cada linea representa una fila  
+esp/esp/esp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   y cada linea representa una fila  
+&nbsp;0 /&nbsp; 1 / esp&nbsp; -> Información de el tablero mostrado al usuario, utiliza el  
+&nbsp;0 /&nbsp; 1 / esp &nbsp; &nbsp; &nbsp; mismo formato del caso anterior separando cada elemento de  
+&nbsp;0 /&nbsp; 1 /&nbsp; esp &nbsp; &nbsp; &nbsp;la lista con "/" y cada linea representa una fila  
 ***esp será un espacio en blanco en el archivo guardado**  
 ****La información del tablero se almacena en una lista de listas**  
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
