@@ -7,10 +7,13 @@ comando, largo, ancho, legos_tablero, board, board_showed,\
  user = "", 0, 0, 0, [], [], "default"
 folder = path.join(path.dirname(__file__), "partidas")
 rank = path.join(path.dirname(__file__), "puntajes.dat")
-acento = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u", "Á": "A", "É": "E",
-          "Í": "I", "Ó": "O", "Ú": "U"}
 valores_validos = ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
                    "14", "15"]
+caracteres_invalidos = ["|", "¿", "?", "°", "!", "¡", "á", "é", "í", "ó", "ú",
+                        "Á", "É", "Í", "Ó", "Ú", "ä", "é", "ï", "ö", "ü", "Ä",
+                        "Ë", "Ï", "Ö", "Ü", "à", "è", "ì", "ò", "ù", "À", "È",
+                        "Ì", "Ò", "Ù", "Â", "Ê", "Î", "Ô", "Û", "â", "ê", "î",
+                        "ô", "û"]
 menu_juego = ["Descubrir baldosa", "Guardar la partida", "Guardar y" +
               " volver al menú principal"]
 menu_principal = ["Nueva Partida", "Cargar Partida", "Ranking"]
@@ -18,6 +21,7 @@ columna_a_index = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 def error(type):
+    print(" ------ ------")
     if type == 0:
         print("Error - Se ha ingresado un valor inválido")
     elif type == 1:
@@ -36,14 +40,14 @@ def menu(options, back):
     for option in range(1, len(options) + 1):
         print("[" + str(option) + "] " + options[option - 1])
     print("[0]", exit + "\n")
-    comando = input("Ingrese el número de la opción que deseea utilizar:\n")
     print(" ------ ------ ")
+    comando = input("Ingrese el número de la opción que deseea utilizar:\n")
 
 
 def verificar(nombre):
     resultado = 0
     while True:
-        resultado = input("Ingrese un valor entre 3 y 15 para el " + nombre +
+        resultado = input("\nIngrese un valor entre 3 y 15 para el " + nombre +
                           " del tablero:\n")
         if resultado in valores_validos:
             return resultado
@@ -67,9 +71,19 @@ def agregar_lego(probabilidad, legos, excepcion):
 
 
 def generar_tablero():
-    global board, board_showed, user, legos_tablero, largo, ancho
+    global board, board_showed, user, legos_tablero, largo, ancho, valido
     board, board_showed = [], []
-    user = quitar_acento(input("Elige una apodo al que asignar tu partida:\n"))
+    while True:
+        user = input("\nElige una apodo para asignar" +
+                     " a tu partida:\n")
+        valid = True
+        for caracter in caracteres_invalidos:
+            if caracter in user:
+                print(" ------ ------\nError - \"" + caracter + "\" es un "
+                      "caracter inválido\n ------ ------")
+                valid = False
+        if valid:
+            break
     largo = int(verificar("largo"))
     ancho = int(verificar("ancho"))
     legos_tablero = int(largo * ancho * constant.PROB_LEGO // 1)
@@ -98,7 +112,7 @@ def guardar_tablero():
     if not path.exists(folder):
         makedirs(folder)
     if path.isfile(directorio):
-        comando = input("Se ha detectado un archivo guardado con tu mismo " +
+        comando = input("\nSe ha detectado un archivo guardado con tu mismo " +
                         "apodo " + "¿Deseas sobreescribir el archivo?\n[1]" +
                         " Sí\n[0] No\n\n")
         if comando == "1":
@@ -131,7 +145,7 @@ def dato_a_lista(datos):
 
 def cargar_tablero():
     global ancho, largo, legos_tablero, board, board_showed, user, folder
-    user = input("Ingresa el apodo asignado a tu partida:\n")
+    user = input("\nIngresa el apodo asignado a tu partida:\n")
     directorio = path.join(folder, user + ".sav")
     if path.isfile(directorio):
         with open(directorio, "rt") as save:
@@ -166,7 +180,7 @@ def lego_alrededor(fila, columna):
                 if not board_showed[posicion[0]][posicion[1]].isdigit():
                     lego_alrededor(posicion[0], posicion[1])
     else:
-        print("Esa baldosa ya ha sido revelada\n ------ ------\n")
+        print("\nEsa baldosa ya ha sido revelada\n ------ ------\n")
 
 
 def baldosas_descubiertas():
@@ -209,7 +223,7 @@ def game_end():
 def salir(volver):
     global comando
     while True:
-        comando = input("¿Estás seguro de que deseas salir?\n[1] " +
+        comando = input("\n¿Estás seguro de que deseas salir?\n[1] " +
                         "Sí\n[0] No\n\n")
         if comando == "0":
             comando = " "
@@ -220,7 +234,6 @@ def salir(volver):
         elif comando == 1:
             exit(0)
         else:
-            print(" ------ ------")
             error(0)
 
 
@@ -238,7 +251,8 @@ def partida():
             break
         menu(menu_juego, 0)
         if comando == "1":
-            posicion = input("Ingresa la coordenada de la baldosa (Ej: A4)\n")
+            posicion = input("\nIngresa la coordenada de la baldosa" +
+                             "(Ej: A4)\n")
             if posicion[0].isupper() and posicion[1].isdigit() and\
                int(posicion[1:]) < largo:
                 columna = columna_a_index.index(posicion[0])
@@ -258,7 +272,6 @@ def partida():
                     if baldosas_iniciales == 0:
                         baldosas_iniciales = 1
             else:
-                print(" ------ ------")
                 error(0)
         elif comando in ["2", "3"]:
             if guardar_tablero() and comando == "3":
@@ -286,20 +299,9 @@ def imprimir_ranking():
     with open(rank, "rt") as ranking:
         datos = ranking.readlines()
     datos = dato_a_lista(datos)[:10]
-    print("-||Top 10 Mejores puntajes||-")
+    print("\n-||Top 10 Mejores puntajes||-\n")
     for score in datos:
         print(score[0] + ":", score[1], "ptos")
-
-
-def quitar_acento(user):
-    global acento
-    resultado = ""
-    for letra in range(len(user)):
-        if user[letra] in acento:
-            resultado += acento[user[letra]]
-        else:
-            resultado += user[letra]
-    return resultado
 
 
 while comando != 0:
