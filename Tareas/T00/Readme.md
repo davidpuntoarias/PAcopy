@@ -1,4 +1,4 @@
-# Tarea 00: LegoSweeper
+﻿# Tarea 00: LegoSweeper
 
 ## Consideraciones generales :octocat:
 
@@ -20,19 +20,19 @@ Se genera un archivo .sav en la carpeta partidas que tiene el siguiente formato:
 1 -> Cantidad de legos del tablero  
 esp/esp/esp -> Información de las posiciones de los legos en el tablero,  
 esp/esp/ L &nbsp; &nbsp; &nbsp; &nbsp; se trata de una lista donde cada elemento se separa con "/"  
-esp/esp/esp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   y cada linea representa una fila  
-&nbsp;0 /&nbsp; 1 / esp&nbsp; -> Información de el tablero mostrado al usuario, utiliza el  
-&nbsp;0 /&nbsp; 1 / esp &nbsp; &nbsp; &nbsp; mismo formato del caso anterior separando cada elemento de  
-&nbsp;0 /&nbsp; 1 /&nbsp; esp &nbsp; &nbsp; &nbsp;la lista con "/" y cada linea representa una fila  
+esp/esp/esp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   y cada linea representa una fila  
+0/1/esp -> Información de el tablero mostrado al usuario, utiliza el  
+0/1/esp &nbsp;&nbsp;&nbsp;&nbsp; mismo formato del caso anterior separando cada elemento de  
+0/1/esp&nbsp; &nbsp; &nbsp; la lista con "/" y cada linea representa una fila  
 ***esp será un espacio en blanco en el archivo guardado**  
 ****La información del tablero se almacena en una lista de listas**  
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
 
-* Menús a partir de los cuales se puede volver
-* Reglas de juego
-* Descubrimiento automático de casillas adyacentes si hay 0 legos
-* Guardar y Cargar partida
-* Ranking de 10 mejores puntajes y almacenamiento de todos los puntajes en un archivo
+* Menús a partir de los cuales se puede volver <implementado>
+* Reglas de juego <implementado>
+* Descubrimiento automático de casillas adyacentes si hay 0 legos <implementado>
+* Guardar y Cargar partida <implementado>
+* Ranking de 10 mejores puntajes y almacenamiento de todos los puntajes en un archivo <implementado>
 
 ## Ejecución :computer:
 El módulo principal de la tarea a ejecutar es  ```Legosweeper.py```
