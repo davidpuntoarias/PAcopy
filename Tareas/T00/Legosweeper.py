@@ -231,7 +231,7 @@ def salir(volver):
         elif volver:
             comando = " "
             return True
-        elif comando == 1:
+        elif comando == "1":
             exit(0)
         else:
             error(0)
