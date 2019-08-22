@@ -43,7 +43,7 @@ class BancoSeguroDCC(BancoDCC):
             lines = archivo.readlines()
         clients = []
         for line in lines:
-            pass
+            clients.append(linea.split(,))
 
 
     def realizar_transaccion(self, id_cliente, dinero, accion):

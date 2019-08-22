@@ -9,8 +9,7 @@ def recuperar_archivo(ruta):
     print('Recuperando archivo')
     drpinto = DrPintoDesencriptador()
     drpinto.ruta = ruta
-    print(drpinto.ruta)
-    return drpinto.texto_desencriptado()
+    return drpinto.texto_desencriptado
 
 
 def guardar_archivo(ruta, lineas_archivo):
