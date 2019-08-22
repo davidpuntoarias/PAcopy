@@ -44,7 +44,7 @@ class BancoSeguroDCC(BancoDCC):
         clients = []
         for line in lines:
             clients.append(linea.split(,))
-
+        self.clientes = clients
 
     def realizar_transaccion(self, id_cliente, dinero, accion):
         # completar
