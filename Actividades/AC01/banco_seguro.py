@@ -24,7 +24,7 @@ class ClienteSeguro(Cliente):
         self.saldo_actual = self.dinero
         ruta_transacciones = path.join('banco_seguro', 'transacciones.txt')
         with open(ruta_transacciones, 'a+', encoding='utf-8') as archivo:
-            archivo.write()
+            archivo.write(f"{self.id_cliente}, deposita, {dinero}")
 
     def retiro_seguro(self, dinero):
         if not self.tiene_fraude:
@@ -32,7 +32,7 @@ class ClienteSeguro(Cliente):
             self.saldo_actual(self.dinero)
         ruta_transacciones = path.join('banco_seguro', 'transacciones.txt')
         with open(ruta_transacciones, 'a+', encoding='utf-8') as archivo:
-            archivo.write()
+            archivo.write(f"{self.id_cliente}, retira, {dinero}")
 
 class BancoSeguroDCC(BancoDCC):
     def __init__(self):
