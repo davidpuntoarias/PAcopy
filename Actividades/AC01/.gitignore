@@ -1,0 +1,12 @@
+# --------------------------------------------
+# Python
+# --------------------------------------------
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+output_esperado/
+*.py[cod]
+*$py.class
+*AC01__IIC2233_2019_2.pdf
+*.idea
+*.DS_STORE
