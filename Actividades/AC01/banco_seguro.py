@@ -42,15 +42,16 @@ class BancoSeguroDCC(BancoDCC):
         with open(ruta, "rt") as archivo:
             lines = archivo.readlines()
         clients = []
-        for line in lines:
-            clients.append(linea.split(,))
+        for linea in lines:
+            persona = linea.split(",")
+            clients.append(ClienteSeguro(persona[0], persona[1], persona[2])
         self.clientes = clients
 
     def realizar_transaccion(self, id_cliente, dinero, accion):
         for client in range(len(self.clientes)):
             if id_cliente == clientes[client][0]:
                 break
-
+        
     def verificar_historial_transacciones(self, historial):
         print('Validando transacciones')
         # completar
