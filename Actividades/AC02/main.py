@@ -28,7 +28,8 @@ Aquí debes completar las funciones propias de Acciones en DCCampal
 
 def distraer(alumno, ayudante):
     comidacompartida = list(alumno[1] & ayudante[1])
-    indice = randint(0, len(comidacompartida))
+    if len(comidacompartida) != 1:
+        indice = randint(0, len(comidacompartida))
     if comidacompartida != [] and len(alumno[1]) != 0:
         alumno.remove(comidacompartida[indice])
         ayudante[2] = comidacompartida[indice]
