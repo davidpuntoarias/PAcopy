@@ -48,10 +48,10 @@ class BancoSeguroDCC(BancoDCC):
         self.clientes = clients
 
     def realizar_transaccion(self, id_cliente, dinero, accion):
-        for client in range(len(self.clientes)):
+        for client in self.clientes:
             if id_cliente == clientes[client][0]:
                 break
-        
+
     def verificar_historial_transacciones(self, historial):
         print('Validando transacciones')
         # completar
