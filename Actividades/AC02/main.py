@@ -29,7 +29,7 @@ Aquí debes completar las funciones propias de Acciones en DCCampal
 def distraer(alumno, ayudante):
     comidacompartida = list(alumno[1] & ayudante[1])
     indice = randint(0, len(comidacompartida))
-    if comidacompartida != [] and alumno:
+    if comidacompartida != [] and len(alumno[1]) != 0:
         alumno.remove(comidacompartida[indice])
         ayudante[2] = comidacompartida[indice]
         return True
@@ -57,7 +57,9 @@ def simular_batalla(alumnos, ayudantes):
             ayudante_defensor = ayudantes_del_piso[0] # Debes obtener el ayudante que le toca defender
             alumno_atacante = alumnos[-1] # Debes obtener el alumno que le toca distraer
             while not distraer(alumno_atacante, ayudante_defensor):
-                alumno_atacante.pop()
+                if alumnos:
+                    alumnos.pop()
+                    break
                 # Si no se logró distraer el ayudante con el alumno actual,
                 # se debe mandar a la casa al alumno
                 # Si quedan alumnos, intentamos con otro alumno,
