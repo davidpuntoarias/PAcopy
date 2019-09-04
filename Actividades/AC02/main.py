@@ -30,6 +30,8 @@ def distraer(alumno, ayudante):
     comidacompartida = list(alumno[1] & ayudante[1])
     if len(comidacompartida) != 1:
         indice = randint(0, len(comidacompartida))
+    else:
+        indice = 0
     if comidacompartida != [] and len(alumno[1]) != 0:
         alumno.remove(comidacompartida[indice])
         ayudante[2] = comidacompartida[indice]
