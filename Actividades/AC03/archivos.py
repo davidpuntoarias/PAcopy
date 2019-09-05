@@ -24,6 +24,10 @@ def desencriptar(funcion_decodificadora, tipo_archivo):
     # Este es el código base del decorador y es completamente editable
     def decorador(funcion_a_decorar):
         def wrapper(*args, **kwargs):
+            for lista, linea in funcion_a_decorar():
+                for string in lista, linea:
+                    funcion_decodificadora(string)
+                if tipo_archivo == Cancion[]
             return funcion_a_decorar(*args, **kwargs)
         return wrapper
     return decorador

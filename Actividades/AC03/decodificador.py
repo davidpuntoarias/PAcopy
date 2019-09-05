@@ -2,17 +2,24 @@ from itertools import chain
 
 
 def decodificar(string):
-    keys = {"a": "0", "r": "1", "q": "2", "u": "3", "e": "4", "t": "5",
-            "i": "6", "p": "7", "o": "8", "s": "9"}
-    items = {"0": "a", "1": "r", "2": "q", "3": "u", "4": "e", "5": "t",
-             "6": "i", "7": "p", "8": "o", "9": "s"}
+    string_ = (str(letter) for letter in string)
     result = ""
-    for letter in string:
-        if letter in "arquetipos":
-            result += keys[letter]
-        elif letter in "0123456789":
-            result += items[letter]
-        else:
+    for letter in string_:
+        done = False
+        numeros = (str(num) for num in range(10))
+        letras = (letter for letter in "arquetipos")
+        letras_ = zip(letras, numeros)
+        numeros_ = zip(numeros, letras)
+        for key in numeros_:
+            if key[0] == letter:
+                result += key[1]
+                done = True
+                break
+            elif key[1] == letter:
+                result += key[0]
+                done = True
+                break
+        if not done:
             result += letter
     return result
 
