@@ -73,8 +73,9 @@ class Menu_carrera(Menu):
 
 
 class Racers():
-    def __init__(self, cuerpo, balance, personalidad, equipo):
-        self.experience = 0
+    def __init__(self, npc, cuerpo, balance, personalidad, equipo):
+        if not npc:
+            self.experience = 0
         self.team = equipo
         self.personality = personalidad
         self.body = cuerpo
@@ -97,6 +98,20 @@ class Cars():
                f"\nRuedas: {self.wheels}\nZapatillas: {self.shoes}\nMotor: {self.motor}")
 
 
+class Game():
+    def __init__(self, usuario, vehiculo_actual, corredores):
+        self.user = usuario
+        self.actual_car = vehiculo_actual
+        self.dinero = 0
+        self.racers = corredores
+
+    def save_game(self):
+        pass
+
+    def start_game(self):
+        pass
+
+
 def new_car(tipo):
     max_min = tipo_a_parametro[tipo]
     chasis = randint(max_min["CHASIS"]["MIN"], max_min["CHASIS"]["MAX"])
@@ -116,12 +131,23 @@ def start_game():
     pass
 
 
-def save_game():
-    pass
-
-
 def load_game():
     pass
+
+
+def print_options(options):
+    for index, option in zip(range(len(options)), options):
+        print(f"[{index}] {option}")
+
+
+def new_game():
+    name = input("Selecciona un nombre de usuario:\n")
+    if "".join(filter(lambda character: character != " ", name)).isalpha():
+        print("Selecciona uno de los siguientes equipos disponibles:\n")
+        print_options(("Tareos", "Hibridos", "Docencios"))
+        comand = input()
+        if comand.isnumeric():
+            Game(Racers(False, comand,)
 
 
 tocomocho = new_car("Automovil")
