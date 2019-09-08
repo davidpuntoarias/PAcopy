@@ -25,9 +25,12 @@ def desencriptar(funcion_decodificadora, tipo_archivo):
     def decorador(funcion_a_decorar):
         def wrapper(*args, **kwargs):
             for lista, linea in funcion_a_decorar():
+                string = funcion_a_decorar(*args, **kwargs)
                 for string in lista, linea:
                     funcion_decodificadora(string)
-                if tipo_archivo == Cancion[]
+                if tipo_archivo == "Cancion":
+                    instance = Cancion[string[1]]
+                    yield instance
             return funcion_a_decorar(*args, **kwargs)
         return wrapper
     return decorador

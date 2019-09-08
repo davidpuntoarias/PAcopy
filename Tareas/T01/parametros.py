@@ -1,3 +1,4 @@
+from os import path
 # Valores máximos y mínimos de las partes y el peso de los vehículos
 
 AUTOMOVIL = {
@@ -199,10 +200,10 @@ BONIFICACION_OSADO = None
 # Paths de los archivos
 
 PATHS = {
-    'PISTAS': None,
-    'CONTRINCANTES': None,
-    'PILOTOS': None,
-    'VEHICULOS': None,
+    'PISTAS': path.join(path.dirname(__file__), "pistas.csv"),
+    'CONTRINCANTES': path.join(path.dirname(__file__), "contrincantes.csv"),
+    'PILOTOS': path.join(path.dirname(__file__), "pilotos.csv"),
+    'VEHICULOS': path.join(path.dirname(__file__), "vehículos.csv"),
 }
 
 
