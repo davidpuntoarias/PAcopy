@@ -108,7 +108,7 @@ def load_cars():
     list_cars = []
     for line in racers[1:]:
         racer = line[:-1].split(",")
-        list_cars.append(Racers(racer[0], racer[1], racer[2], racer[3],
+        list_cars.append(Cars(racer[0], racer[1], racer[2], racer[3],
                          racer[4], racer[5], racer[6]))
     return list_cars
 
@@ -119,8 +119,8 @@ def load_tracks():
     list_tracks = []
     for line in tracks[1:]:
         track = line[:-1].split(",")
-        list_tracks.append(track[0], track[1], track[2], track[3], track[4],
-                           track[5].split(";"), track[6], track[7])
+        list_tracks.append(Tracks(tracks[0], track[1], track[2], track[3], track[4],
+                           track[5].split(";"), track[6], track[7]))
 
 
 def load_racers():
@@ -129,6 +129,6 @@ def load_racers():
     list_racers = []
     for line in racers[1:]:
         racer = line[:-1].split(",")
-        list_tracks.append(track[0], track[1], track[2], track[3], track[4],
-                           track[5], track[6])
+        list_racers.append(Racers(racer[0], racer[1], racer[2], racer[3],
+                                  racer[4], racer[5], racer[6]))
     return list_racers
