@@ -40,7 +40,8 @@ class Simulacion:
         demoraron en terminar el túnel
         :return:
         '''
-        pass
+        print(f"ESTADISTAS DEL GAMEPLAY:\n-Dinero impreso:" +
+              f" {self.bolsa_dinero.dinero_acumulado}\n-Tiempo empleado: {self.t_fin} horas")
 
 
 if __name__ == '__main__':
