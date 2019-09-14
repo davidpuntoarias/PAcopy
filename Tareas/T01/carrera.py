@@ -53,7 +53,7 @@ class Cars():
 
     @chasis.setter
     def chasis(self, x):
-        self.chassis = self.chassis * (parametros.MEJORAS["CHASIS"]) * x
+        self.chassis = self.chassis + parametros.MEJORAS["CHASIS"]["EFECTO"] * x
 
     @property
     def carroceria(self):
@@ -61,7 +61,7 @@ class Cars():
 
     @carroceria.setter
     def carroceria(self, x):
-        self.body = self.body * (parametros.MEJORAS["CARROCERIA"]) * x
+        self.body = self.body + parametros.MEJORAS["CARROCERIA"]["EFECTO"] * x
 
     @property
     def ruedas(self):
@@ -69,7 +69,7 @@ class Cars():
 
     @ruedas.setter
     def ruedas(self, x):
-        self.wheels = self.wheels * (parametros.MEJORAS["RUEDAS"]) * x
+        self.wheels = self.wheels + parametros.MEJORAS["RUEDAS"]["EFECTO"] * x
 
     @property
     def motor(self):
@@ -78,12 +78,15 @@ class Cars():
     @motor.setter
     def motor(self, x):
         if self.type in ("automóvil", "troncomóvil"):
-            return self.engine * parametros.MEJORAS["MOTOR"] * x
+            self.engine = self.engine + parametros.MEJORAS["MOTOR"]["EFECTO"] * x
         else:
-            return self.engine * parametros.MEJORAS["ZAPATILLAS"] * x
+            self.engine = self.engine + parametros.MEJORAS["ZAPATILLAS"]["EFECTO"] * x
 
     def __repr__(self):
-        return self.name
+        return ("{:<31s}| Chasis:{:>5d}| Carrocería:{:>5d}|" +
+                " Peso:{:>5d}| Ruedas:{:>5d}| Aceleración:{:>5d}").\
+                format(self.name, self.chasis, self.carroceria,
+                       self.weight, self.ruedas, self.motor)
 
 
 class Tracks():
@@ -104,35 +107,49 @@ class Tracks():
 class Race():
     def __init__(self, pista, corredores, user):
         self.track = pista
-        self.user_car = user
+        self.user = user
         self.racers = corredores + [user]
         self.losers = []
         self.laps = 0
 
     def continue_race(self, game, is_user):
+        indexs = []
         for index, racer in zip(range(len(self.racers)), self.racers):
-            racer.car.chassis_damage = funciones.car_damage(racer.car, self.track)
+            racer.car.chassis_damage += funciones.car_damage(racer.car, self.track)
             if uniform(0, 1) <= funciones.accident(racer.car, racer, self.track, self):
                 racer.car.chassis_damage = racer.car.chassis
-            racer.time_race += funciones.lap_time(racer.car, racer, self.track, self)
+            racer.time_lap = funciones.lap_time(racer.car, racer, self.track, self)
+            racer.time_race += racer.time_lap
             if racer.car.chasis == 0:
-                self.losers.append(self.racers.pop(index))
-                if racer.name == game.user.name:
-                    while self.laps != self.track.laps:
-                        return continue_race(self, game, False)
+                self.losers.append(self.racers[index])
+                indexs.append(index)
+                if racer.name == self.user.name:
+                    while self.laps < self.track.laps - 1:
+                        self.continue_race(game, False)
+                    print("\nHas sido eliminado de la carrera debido a un accidente.",
+                          "Los resultados de la carrera fueron:")
+                    return self.end_race(game)
+        for index in indexs[::-1]:
+            self.racers.pop(index)
         self.laps += 1
         if self.laps == self.track.laps:
             return self.end_race(game)
         if is_user:
             self.racers.sort(key=racer_place)
-            if game.user.name == self.racers[0].name:
-                self.racers[0].money += funciones.money_per_lap(self, self.track)
+            if self.user == self.racers[0]:
+                self.user.money += funciones.money_per_lap(self, self.track)
             print(f"\nVuelta: {self.laps} / {self.track.laps}\nPosiciones de los corredores:")
             if funciones.velocidad_intencional(racer.car, racer, self.track) !=\
                funciones.velocidad_real(racer.car, racer, self.track, self):
                 print("Tu velocidad ha sido afectada durante esta vuelta")
             else:
                 print("Tu velocidad no ha sido afectada durante esta vuelta")
+            if funciones.dificultad_control() != 0:
+                print("Has tenido dificultades para controlar tu vehículo")
+            if funciones.car_damage != 0:
+                print("Tú chasis se ha dañado!")
+            if funciones.hipotermia() != 0:
+                pritn("Has sido victima de la hipotermia debido al hielo de la pista")
             print_places(self.racers)
             if self.losers != []:
                 print("Competidores descalificados:")
@@ -142,20 +159,17 @@ class Race():
     def end_race(self, game):
         self.racers.sort(key=racer_place)
         print_places(self.racers)
-        if game.user == self.racers[0]:
+        if self.user == self.racers[0]:
             money = funciones.winner_price(self.track)
-            exp = funciones.winner_exp(self.racer[0], self.track,
-                                       self.racer[len(racer) - 1])
+            exp = funciones.winner_exp(self.user, self.track,
+                                       self.racers[len(self.racers) - 1])
             print("\nFelicidades has sido el ganador de la carrera\n",
-                  f"Has consegido ${money} y {exp} puntos de experiencia")
-            self.racers[0].money += money
-            self.racer[0].exp += exp
+                  f"Has conseguido ${money} y {exp} puntos de experiencia")
+            self.user.money += money
+            self.user.experience += exp
         else:
             print("\nNos has sido el ganador, pero has ganado en diversión\n")
-        for racer in self.losers:
-            racer.time_race = 0
-            racer.car.chassis_damage = 0
-        for racer in self.racers:
+        for racer in (self.racers + self.losers):
             racer.time_race = 0
             racer.car.chassis_damage = 0
         return True
@@ -223,6 +237,7 @@ class Game():
                 racers.pop(index)
         control_datos.save_racers(racers + [self.user])
         control_datos.save_cars(self.cars + self.user_cars)
+        print("\n-Tus datos han sido almacenados de manera exitosa-\n")
 
     def load_game(self):
         name = False
@@ -240,22 +255,27 @@ class Game():
         for usuario in self.users:
             if name == usuario.name:
                 self.user = usuario
-        del(self.users)
-        for index, vehiculo in zip(range(len(self.cars)), self.cars):
+        indexs = []
+        for index, vehiculo in zip(range(len(self.cars) + 1), self.cars):
             if name == vehiculo.owner:
-                self.user_cars.append(self.cars.pop(index))
+                self.user_cars.append(self.cars[index])
+                indexs.append(index)
+        for index in indexs[::-1]:
+            self.cars.pop(index)
+        del(self.users)
 
     def start_race(self):
         menu_rc = menus.Menu_race_configuration()
         menu_r = menus.Menu_race("Ir a los pits", "Continuar la carrera")
         race = menu_rc.selection(self)
-        while True:
-            if menu_r.selection(self):
-                if menu_r.option(self, race):
-                    break
-            else:
-                if race.continue_race(self, True):
-                    break
+        if not race.continue_race(self, True):
+            while True:
+                if menu_r.selection(self):
+                    if menu_r.option(self, race):
+                        break
+                else:
+                    if race.continue_race(self, True):
+                        break
 
     def buy_car(self):
         menu_b = menus.Menu_buy([("Automóvil", 500), ("Troncomóvil", 900),
@@ -267,17 +287,16 @@ class Game():
                     name = check_alpha("Selecciona un nombre para tu vehiculo:\n")
                     if name and name in self.user_cars:
                         error(6)
+                        name = False
                     elif name:
                         break
-                new_car(name, self.user, number_car[menu_b.option])
+                self.user_cars.append(new_car(name, number_car[menu_b.option], self.user))
                 self.user.money -= menu_b.options[menu_b.option][1]
+                print("\n-Compra realizada con exito-\n")
             else:
                 break
 
     def pits(self, race):
-        car_part = {"Chasis": self.user.car.chasis, "Carrocería": self.user.car.carroceria,
-                    "Ruedas": self.user.car.ruedas, "Zapatillas": self.user.car.motor,
-                    "Motor": self.user.car.motor}
         if self.user.car.chassis != self.user.car.carroceria:
             funciones.pits_time(self.user.car)
             self.user.car.chassis_damage = 0
@@ -292,8 +311,16 @@ class Game():
         while True:
             print(f"Dinero del usuario: {self.user.money}")
             if menu_pt.selection(self):
-                car_part[menu_pt.option[0]] = 1
-                self.user.money -= menu_pt.option[1]
+                if menu_pt.option[0] == "Chasis":
+                    race.user.car.chasis = 1
+                elif menu_pt.option[0] == "Carrocería":
+                    race.user.car.carroceria = 1
+                elif menu_pt.option[0] == "Ruedas":
+                    race.user.car.ruedas = 1
+                else:
+                    race.user.car.motor = 1
+                race.user.money -= menu_pt.option[1]
+                print("\n-Compra realizada con exito-\n")
                 return race.continue_race(self, True)
             else:
                 return race.continue_race(self, True)
@@ -333,10 +360,10 @@ def select_car(all_cars, enemie):
 
 
 def print_places(racers):
-    print("{:>8s}| {:^20s}| {:>6s}| {:>6s}".format("Posición", "Corredor",
+    print("{:>8s} | {:^20s}| {:>6s}| {:>6s}".format("Posición", "Corredor",
           "Tiempo vuelta", "Tiempo total"))
     for index, racer in zip(range(1, len(racers) + 1), racers):
-        print("{:>8d}°| {:^20s}| {:>6d} seg| {:>6d} seg".format(index,
+        print("{:>8d}°| {:^20s}| {:>9d} seg| {:>6d} seg".format(index,
               racer.name, racer.time_lap, racer.time_race))
 
 
@@ -360,7 +387,7 @@ def check_numeric(mensaje):
 def check_length(mensaje):
     command = check_numeric(mensaje)
     if command and len(command) != 1:
-        error(2)
+        error(3)
         return False
     return command
 

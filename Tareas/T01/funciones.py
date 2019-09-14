@@ -28,9 +28,9 @@ def velocidad_intencional(car, racer, track):
 
 
 def velocidad_recomendada(car, racer, track):
-    return car.motor + (car.ruedas - track.ice) * parametros.POND_EFECT_HIELO +\
-           (car.chasis - track.rocks) * parametros.POND_EFECT_ROCAS +\
-           (racer.experience - track.level) * parametros.POND_EFECT_DIFICULTAD
+    return (car.motor + (car.ruedas - track.ice) * parametros.POND_EFECT_HIELO +
+            (car.chasis - track.rocks) * parametros.POND_EFECT_ROCAS +
+            (racer.experience - track.level) * parametros.POND_EFECT_DIFICULTAD)
 
 
 def hipotermia(race, racer, track):
@@ -57,11 +57,11 @@ def accident(car, racer, track, race):
     speed_recommended = velocidad_recomendada(car, racer, track)
     speed_real = velocidad_real(car, racer, track, race)
     return min(1, max(0, (speed_real - speed_recommended)/speed_recommended) +
-               ((car.chassis - car.carroceria)/car.chassis)//1)
+               ((car.chassis_damage)/car.chassis)//1)
 
 
 def winner_price(track):
-    return track.laps * (track.level + track.ice - track.rocks)
+    return track.laps * (track.level + track.ice + track.rocks)
 
 
 def winner_exp(racer, track, last_racer):
@@ -73,4 +73,4 @@ def winner_exp(racer, track, last_racer):
 
 
 def advantage_last_place(racer, last_place):
-    return racer.time_race - last_place.time_race
+    return last_place.time_race - racer.time_race

@@ -1,6 +1,7 @@
 from abc import ABC
 import control_datos
 import carrera
+import parametros
 
 
 class Menu(ABC):
@@ -112,7 +113,7 @@ class Menu_race_configuration(Menu):
             print("Elige la pista en la que deseas competir:")
             print_options(game.tracks)
             pista = carrera.check_numeric("\n")
-            if pista and 0 <= int(pista) - 1 <= len(game.tracks):
+            if pista and 0 <= int(pista) - 1 < len(game.tracks):
                 pista = game.tracks[int(pista) - 1]
                 break
             else:
@@ -121,7 +122,7 @@ class Menu_race_configuration(Menu):
             print("Elige el vehículo con el que deseas competir:")
             print_options(game.user_cars)
             vehiculo = carrera.check_numeric("\n")
-            if vehiculo and 0 <= int(vehiculo) - 1 <= len(game.user_cars):
+            if vehiculo and 0 <= int(vehiculo) - 1 < len(game.user_cars):
                 game.user.car = game.user_cars[int(vehiculo) - 1]
                 break
             else:
@@ -131,6 +132,8 @@ class Menu_race_configuration(Menu):
             if enemie.name in pista.enemies:
                 enemie.car = carrera.select_car(game.cars, enemie)
                 enemigos.append(enemie)
+        while len(enemigos) > parametros.NUMERO_CONTRINCANTES:
+            enemigos.pop(randint(0, len(enemigos)))
         return carrera.Race(pista, enemigos, game.user)
 
 
