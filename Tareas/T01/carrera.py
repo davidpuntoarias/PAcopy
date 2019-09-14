@@ -112,23 +112,23 @@ class Race():
         self.laps = 0
 
     def continue_race(self, game, is_user):
-        for index, racer in zip(range(len(self.racers)), self.racers):
+        for racer in self.racers:
             racer.car.chassis_damage += funciones.car_damage(racer.car, self.track)
             if uniform(0, 1) <= funciones.accident(racer.car, racer, self.track, self):
                 racer.car.chassis_damage = racer.car.chassis
             racer.time_lap = funciones.lap_time(racer.car, racer, self.track, self)
             racer.time_race += racer.time_lap
             if racer.car.chasis == 0:
-                self.losers.append(self.racers[index])
+                self.losers.append(racer)
+                remove_losers(self)
                 if racer.name == self.user.name:
-                    while self.laps < self.track.laps - 1:
+                    while self.laps <= self.track.laps - 1:
                         self.continue_race(game, False)
                     print("\nHas sido eliminado de la carrera debido a un accidente.",
                           "Los resultados de la carrera fueron:")
                     return self.end_race(game)
         self.laps += 1
         if self.laps == self.track.laps:
-            remove_losers(self)
             return self.end_race(game)
         if is_user:
             remove_losers(self)
