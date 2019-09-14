@@ -45,7 +45,6 @@ class Cars():
         self.weight = int(peso)
         self.wheels = int(ruedas)
         self.engine = int(aceleracion)
-        self.damage = 0
 
     @property
     def chasis(self):
