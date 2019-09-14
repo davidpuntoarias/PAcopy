@@ -22,7 +22,7 @@ class Imprimidor(Thread):
             reloj(10)
             if random.uniform(0, 1) <= 0.2:
                 self.problema_papel()
-            if self.bolsa_dinero.dinero_acumulado == self.bolsa_dinero.meta_dinero:
+            if self.bolsa_dinero.dinero_acumulado >= self.bolsa_dinero.meta_dinero:
                 self.bolsa_dinero.dinero_listo.set()
 
     def imprimir_dinero(self, dinero):

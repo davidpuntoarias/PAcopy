@@ -16,11 +16,11 @@ class Excavador(Thread):
         Funcionalidad de Excavador que crea x metros de tunel cada 10 min,
         cada iteracion chequea si se cumple que hay problema con la picota (10%)
         '''
-        if self.tunel.metros_avanzados < self.tunel.largo:
+        while self.tunel.metros_avanzados < self.tunel.largo:
             self.avanzar(random.randint(50, 100))
             if random.uniform(0, 1) <= 0.1:
                 self.problema_picota()
-            if self.tunel.metros_avanzados == self.tunel.largo:
+            if self.tunel.metros_avanzados >= self.tunel.largo:
                 self.tunel.tunel_listo.set()
 
     def problema_picota(self):
@@ -29,8 +29,8 @@ class Excavador(Thread):
         Se llama a berlin para resolverlo
         '''
         print(f"{self.name}: Tengo un problema con la picota")
-        with simulacion.berlin:
-            utils.reloj(5)
+        with self.berlin:
+            reloj(5)
 
     def avanzar(self, metros):
         '''
@@ -40,4 +40,4 @@ class Excavador(Thread):
         '''
         with self.tunel.usar_tunel:
             print(f"{self.name}: Avanzando {metros}mts en el tunel")
-            self.tunel.metros_avanzados -= metros
+            self.tunel.metros_avanzados += metros

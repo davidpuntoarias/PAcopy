@@ -18,7 +18,6 @@ class Tunel:
         self.largo = 6000
         self.tunel_listo = Event()
         self.usar_tunel = Lock()
-        self.tiempo = 0
 
 
 class BolsaDinero:

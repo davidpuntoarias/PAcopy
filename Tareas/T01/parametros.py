@@ -11,7 +11,7 @@ AUTOMOVIL = {
         'MAX': 18
     },
     'RUEDAS': {
-        'MIN': 6,
+        'MIN': 10,
         'MAX': 14
     },
     'MOTOR': {
@@ -30,82 +30,82 @@ AUTOMOVIL = {
 
 TRONCOMOVIL = {
     'CHASIS': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 12,
+        'MAX': 18
     },
     'CARROCERIA': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 14,
+        'MAX': 16
     },
     'RUEDAS': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 6,
+        'MAX': 14
     },
     'MOTOR': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 0,
+        'MAX': 8
     },
     'ZAPATILLAS': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 10,
+        'MAX': 14
     },
     'PESO': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 10,
+        'MAX': 14
     }
 }
 
 MOTOCICLETA = {
     'CHASIS': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 8,
+        'MAX': 14
     },
     'CARROCERIA': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 10,
+        'MAX': 14
     },
     'RUEDAS': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 14,
+        'MAX': 18
     },
     'MOTOR': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 12,
+        'MAX': 18
     },
     'ZAPATILLAS': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 0,
+        'MAX': 10
     },
     'PESO': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 8,
+        'MAX': 10
     }
 }
 
 BICICLETA = {
     'CHASIS': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 12,
+        'MAX': 18
     },
     'CARROCERIA': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 6,
+        'MAX': 10
     },
     'RUEDAS': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 10,
+        'MAX': 16
     },
     'MOTOR': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 0,
+        'MAX': 10
     },
     'ZAPATILLAS': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 12,
+        'MAX': 20
     },
     'PESO': {
-        'MIN': None,
-        'MAX': None
+        'MIN': 4,
+        'MAX': 8
     }
 }
 
@@ -114,24 +114,24 @@ BICICLETA = {
 
 MEJORAS = {
     'CHASIS': {
-        'COSTO': None,
-        'EFECTO': None
+        'COSTO': 100,
+        'EFECTO': 2
     },
     'CARROCERIA': {
-        'COSTO': None,
-        'EFECTO': None
+        'COSTO': 200,
+        'EFECTO': 2
     },
     'RUEDAS': {
-        'COSTO': None,
-        'EFECTO': None
+        'COSTO': 500,
+        'EFECTO': 6
     },
     'MOTOR': {
-        'COSTO': None,
-        'EFECTO': None
+        'COSTO': 400,
+        'EFECTO': 4
     },
     'ZAPATILLAS': {
-        'COSTO': None,
-        'EFECTO': None
+        'COSTO': 200,
+        'EFECTO': 4
     }
 }
 
@@ -141,36 +141,36 @@ MEJORAS = {
 EQUIPOS = {
     'TAREOS': {
         'CONTEXTURA': {
-            'MIN': None,
-            'MAX': None
+            'MIN': 12,
+            'MAX': 18
         },
         'EQUILIBRIO': {
-            'MIN': None,
-            'MAX': None
+            'MIN': 16,
+            'MAX': 20
         },
-        'PERSONALIDAD': None
+        'PERSONALIDAD': "osada"
     },
     'HIBRIDOS': {
         'CONTEXTURA': {
-            'MIN': None,
-            'MAX': None
+            'MIN': 12,
+            'MAX': 18
         },
         'EQUILIBRIO': {
-            'MIN': None,
-            'MAX': None
+            'MIN': 14,
+            'MAX': 20
         },
-        'PERSONALIDAD': None
+        'PERSONALIDAD': "precavido"
     },
     'DOCENCIOS': {
         'CONTEXTURA': {
-            'MIN': None,
-            'MAX': None
+            'MIN': 14,
+            'MAX': 20
         },
         'EQUILIBRIO': {
-            'MIN': None,
-            'MAX': None
+            'MIN': 8,
+            'MAX': 14
         },
-        'PERSONALIDAD': None
+        'PERSONALIDAD': "precavido"
     }
 }
 
@@ -178,24 +178,28 @@ EQUIPOS = {
 # Las constantes de las formulas
 
 # Velocidad real
-VELOCIDAD_MINIMA = None
+VELOCIDAD_MINIMA = 10
 
 # Velocidad intencional
-EFECTO_OSADO = None
-EFECTO_PRECAVIDO = None
+EFECTO_OSADO = 2
+EFECTO_PRECAVIDO = 6
 
 # Dificultad de control del vehículo
-PESO_MEDIO = None
-EQUILIBRIO_PRECAVIDO = None
+PESO_MEDIO = 22
+EQUILIBRIO_PRECAVIDO = 14
 
 # Tiempo pits
-TIEMPO_MINIMO_PITS = None
-VELOCIDAD_PITS = None
+TIEMPO_MINIMO_PITS = 20
+VELOCIDAD_PITS = 12
 
 # Experiencia por ganar
-BONIFICACION_PRECAVIDO = None
-BONIFICACION_OSADO = None
+BONIFICACION_PRECAVIDO = 16
+BONIFICACION_OSADO = 20
 
+# Efectos hielo y roca
+POND_EFECT_ROCAS = 12
+POND_EFECT_DIFICULTAD = 16
+POND_EFECT_HIELO = 14
 
 # Paths de los archivos
 

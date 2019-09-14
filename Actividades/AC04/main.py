@@ -41,7 +41,7 @@ class Simulacion:
         :return:
         '''
         print(f"ESTADISTAS DEL GAMEPLAY:\n-Dinero impreso:" +
-              f" {self.bolsa_dinero.dinero_acumulado}\n-Tiempo empleado: {self.t_fin} horas")
+              f" {self.bolsa_dinero.dinero_acumulado}\n-Tiempo empleado: {self.t_fin - self.t_inicio} horas")
 
 
 if __name__ == '__main__':
