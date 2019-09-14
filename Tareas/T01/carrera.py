@@ -112,7 +112,6 @@ class Race():
         self.laps = 0
 
     def continue_race(self, game, is_user):
-        indexs = []
         for index, racer in zip(range(len(self.racers)), self.racers):
             racer.car.chassis_damage += funciones.car_damage(racer.car, self.track)
             if uniform(0, 1) <= funciones.accident(racer.car, racer, self.track, self):
@@ -121,19 +120,18 @@ class Race():
             racer.time_race += racer.time_lap
             if racer.car.chasis == 0:
                 self.losers.append(self.racers[index])
-                indexs.append(index)
                 if racer.name == self.user.name:
                     while self.laps < self.track.laps - 1:
                         self.continue_race(game, False)
                     print("\nHas sido eliminado de la carrera debido a un accidente.",
                           "Los resultados de la carrera fueron:")
                     return self.end_race(game)
-        for index in indexs[::-1]:
-            self.racers.pop(index)
         self.laps += 1
         if self.laps == self.track.laps:
+            remove_losers(self)
             return self.end_race(game)
         if is_user:
+            remove_losers(self)
             self.racers.sort(key=racer_place)
             if self.user == self.racers[0]:
                 self.user.money += funciones.money_per_lap(self, self.track)
@@ -143,11 +141,11 @@ class Race():
                 print("Tu velocidad ha sido afectada durante esta vuelta")
             else:
                 print("Tu velocidad no ha sido afectada durante esta vuelta")
-            if funciones.dificultad_control() != 0:
+            if funciones.dificultad_control(self.user.car, self.user) != 0:
                 print("Has tenido dificultades para controlar tu vehículo")
-            if funciones.car_damage != 0:
+            if funciones.car_damage(self.user.car, self.track) != 0:
                 print("Tú chasis se ha dañado!")
-            if funciones.hipotermia() != 0:
+            if funciones.hipotermia(self, self.user, self.track) != 0:
                 pritn("Has sido victima de la hipotermia debido al hielo de la pista")
             print_places(self.racers)
             if self.losers != []:
@@ -393,6 +391,12 @@ def check_length(mensaje):
 
 def racer_place(racer):
     return racer.time_race
+
+
+def remove_losers(race):
+    for index, racer in zip(range(len(race.racers)), race.racers):
+        if racer in race.losers:
+            race.racers.pop(index)
 
 
 def error(option):
