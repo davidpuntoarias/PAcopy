@@ -115,7 +115,7 @@ BICICLETA = {
 MEJORAS = {
     'CHASIS': {
         'COSTO': 100,
-        'EFECTO': 3
+        'EFECTO': 2
     },
     'CARROCERIA': {
         'COSTO': 50,
@@ -123,15 +123,15 @@ MEJORAS = {
     },
     'RUEDAS': {
         'COSTO': 120,
-        'EFECTO': 4
+        'EFECTO': 3
     },
     'MOTOR': {
         'COSTO': 270,
-        'EFECTO': 2
+        'EFECTO': 4
     },
     'ZAPATILLAS': {
         'COSTO': 200,
-        'EFECTO': 6
+        'EFECTO': 3
     }
 }
 

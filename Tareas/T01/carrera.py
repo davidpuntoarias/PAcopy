@@ -52,7 +52,7 @@ class Cars():
 
     @chasis.setter
     def chasis(self, x):
-        self.chassis = self.chassis + parametros.MEJORAS["CHASIS"]["EFECTO"] * x
+        self.chassis = self.chassis * parametros.MEJORAS["CHASIS"]["EFECTO"] * x
 
     @property
     def carroceria(self):
@@ -60,7 +60,7 @@ class Cars():
 
     @carroceria.setter
     def carroceria(self, x):
-        self.body = self.body + parametros.MEJORAS["CARROCERIA"]["EFECTO"] * x
+        self.body = self.body * parametros.MEJORAS["CARROCERIA"]["EFECTO"] * x
 
     @property
     def ruedas(self):
@@ -68,7 +68,7 @@ class Cars():
 
     @ruedas.setter
     def ruedas(self, x):
-        self.wheels = self.wheels + parametros.MEJORAS["RUEDAS"]["EFECTO"] * x
+        self.wheels = self.wheels * parametros.MEJORAS["RUEDAS"]["EFECTO"] * x
 
     @property
     def motor(self):
@@ -77,9 +77,9 @@ class Cars():
     @motor.setter
     def motor(self, x):
         if self.type in ("automóvil", "troncomóvil"):
-            self.engine = self.engine + parametros.MEJORAS["MOTOR"]["EFECTO"] * x
+            self.engine = self.engine * parametros.MEJORAS["MOTOR"]["EFECTO"] * x
         else:
-            self.engine = self.engine + parametros.MEJORAS["ZAPATILLAS"]["EFECTO"] * x
+            self.engine = self.engine * parametros.MEJORAS["ZAPATILLAS"]["EFECTO"] * x
 
     def __repr__(self):
         return ("{:<31s}| Chasis:{:>5d}| Carrocería:{:>5d}|" +
