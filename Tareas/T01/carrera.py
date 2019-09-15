@@ -120,18 +120,18 @@ class Race():
             racer.time_race += racer.time_lap
             if racer.car.chasis == 0:
                 self.losers.append(racer)
-                remove_losers(self)
                 if racer.name == self.user.name:
+                    self.racers = list(filter(lambda corredor: (corredor.car.chasis != 0), self.racers))
                     while self.laps <= self.track.laps - 1:
                         self.continue_race(game, False)
                     print("\nHas sido eliminado de la carrera debido a un accidente.",
                           "Los resultados de la carrera fueron:")
                     return self.end_race(game)
+        self.racers = list(filter(lambda racer: (racer.car.chasis != 0), self.racers))
         self.laps += 1
         if self.laps == self.track.laps:
             return self.end_race(game)
         if is_user:
-            remove_losers(self)
             self.racers.sort(key=racer_place)
             if self.user == self.racers[0]:
                 self.user.money += funciones.money_per_lap(self, self.track)
@@ -391,12 +391,6 @@ def check_length(mensaje):
 
 def racer_place(racer):
     return racer.time_race
-
-
-def remove_losers(race):
-    for index, racer in zip(range(len(race.racers)), race.racers):
-        if racer in race.losers:
-            race.racers.pop(index)
 
 
 def error(option):
