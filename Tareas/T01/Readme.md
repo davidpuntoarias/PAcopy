@@ -15,9 +15,7 @@
    * Menú pits: < implementado >
    * Menú comprar auto: < implementado >
 * **Flujo de carrera**: <Implementado en módulo "carrera.py">
-    * <Nombre subitem pauta<sub>2.1</sub>>: Hecha completa 
-    * <Nombre subitem pauta<sub>2.2</sub>>: Me faltó hacer <insertar qué cosa faltó>
-    * ...
+    * La velocidad real aparentemente siempre me da valores negativos, por lo tanto,  siempre se utiliza la velocidad mínima.
 * **Entidades**: <Implementado en módulo "carrera.py">
    * Vehículo: < implementado >
    * Pista: < implementado >
@@ -34,11 +32,7 @@
    * Cálculo de velocidad: < implementado >
 
 ## Ejecución :computer:
-El módulo principal de la tarea a ejecutar es  ```archivo.py```. Además se debe crear los siguientes archivos y directorios adicionales:
-1. ```archivo.ext``` en ```ubicación```
-2. ```directorio``` en ```ubicación```
-3. ...
-
+El módulo principal de la tarea a ejecutar es  ```InitialP.py```:
 
 ## Librerías :books:
 ### Librerías externas utilizadas
@@ -71,30 +65,15 @@ PD: <una última consideración (de ser necesaria) o comentario hecho anteriorme
 
 
 
-**EXTRA:** si van a explicar qué hace específicamente un método, no lo coloquen en el README mismo. Pueden hacerlo directamente comentando el método en su archivo. Por ejemplo:
+**EXTRA:**  No alcance a colocar la explicación de las funciones en el programa, así que las colocaré aquí por si son de utilidad
+* ** Módulo <menus.py>**:
+   * print(): Lo posee cada clase se encarga de utilizar la funcion print_options() sobre cada elemento de self.options y despues imprime f"[0] {self.exit}".
+ Si se encuentra dentro de la clase Menu_race se ha utilizado un funcionamiento similar, pero solo para una opcion.
+ En Menu_pits y Menu_buy se ha modificado para imprimir el indes, la opciones a comprar y su precio.
+   * selection(): Se asegura que el comando ingresado sea un número solo compuesto por unidades, entonces devuelve el comando. Si no se cumple esta condición devuelve False
+   * print_options(): Se ecarga de recibir una lista, posteriormente imprime el index de la lista junto a el elemento de la lista
 
-```python
-class Corrector:
-
-    def __init__(self):
-          pass
-
-    # Este método coloca un 6 en las tareas que recibe
-    def corregir(self, tarea):
-        tarea.nota  = 6
-        return tarea
-```
-
-Si quieren ser más formales, pueden usar alguna convención de documentación. Google tiene la suya, Python tiene otra y hay muchas más. La de Python es la [PEP287, conocida como reST](https://www.python.org/dev/peps/pep-0287/). Lo más básico es documentar así:
-
-```python
-def funcion(argumento):
-    """
-    Mi función hace X con el argumento
-    """
-    return argumento_modificado
-```
-Lo importante es que expliquen qué hace la función y que si saben que alguna parte puede quedar complicada de entender o tienen alguna función mágica usen los comentarios/documentación para que el ayudante entienda sus intenciones.
+* ** Módulo <menus.py>**:
 
 ## Descuentos
 La guía de descuentos se encuentra [link](https://github.com/IIC2233/syllabus/blob/master/Tareas/Descuentos.md).
